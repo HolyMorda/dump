@@ -85,3 +85,47 @@ const styles = StyleSheet.create({
     // elevation:10,
   },
 });
+
+
+// previous 
+
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { forwardRef } from "react";
+import { useTheme } from "../../providers/ThemeProvider";
+
+const Button = forwardRef(({ text, buttonColor, ...pressableProps }, ref) => {
+  const { theme } = useTheme();
+
+  return (
+    <Pressable
+      ref={ref}
+      {...pressableProps}
+      style={({ pressed }) => [
+        styles.button,
+        {
+          backgroundColor: pressed ? "#F29057" : buttonColor,
+        },
+      ]}
+    >
+      <Text style={[styles.text, { color: theme.buttonTextColor }]}>
+        {text}
+      </Text>
+    </Pressable>
+  );
+});
+
+export default Button;
+
+const styles = StyleSheet.create({
+  button: {
+    flex: 1,
+    padding: 10,
+    alignItems: "center",
+    borderRadius: 100,
+    marginVertical: 10,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: "600",
+  },
+});
